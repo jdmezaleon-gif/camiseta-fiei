@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡YAPÉAME PARA MI CAMISETA FIEI-UNFV! 🚀👕</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        unfv: {
+                            maroon: '#6A0C1A',
+                            dark: '#2A040A',
+                            light: '#8B1832',
+                            gold: '#D4AF37',
+                            cyan: '#00F0FF',
+                            yape: '#742284',
+                            yapeBright: '#A228B6'
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 2.5s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                        'bounce-subtle': 'bounceSubtle 2s infinite'
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 20px rgba(116, 34, 132, 0.6), 0 0 35px rgba(212, 175, 55, 0.4)' },
+                            '50%': { boxShadow: '0 0 30px rgba(0, 240, 255, 0.8), 0 0 50px rgba(162, 40, 182, 0.9)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' }
+                        },
+                        bounceSubtle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #120206;
+            color: #f8fafc;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            overflow-x: hidden;
+        }
+
+        .campus-banner {
+            background-image: linear-gradient(180deg, rgba(18, 2, 6, 0.82) 0%, rgba(18, 2, 6, 0.96) 85%, #120206 100%), 
+                              url('https://i.ibb.co/3sSvd13/image-da485d.jpg');
+            background-size: cover;
+            background-position: center top;
+            background-repeat: no-repeat;
+        }
+
+        .glass-card {
+            background: rgba(42, 4, 10, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(212, 175, 55, 0.35);
+        }
+
+        .shirt-zoom-container {
+            overflow: hidden;
+            border-radius: 1.25rem;
+        }
+
+        .shirt-zoom-img {
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease;
+        }
+
+        .shirt-zoom-container:hover .shirt-zoom-img {
+            transform: scale(1.07) rotate(1deg);
+            filter: brightness(1.1) drop-shadow(0 0 20px rgba(0, 240, 255, 0.6));
+        }
+
+        #toast {
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform: translateY(120px);
+            opacity: 0;
+        }
+        #toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12 flex flex-col items-center justify-start relative">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 z-50 bg-gradient-to-r from-purple-700 via-unfv-yape to-purple-900 text-white px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-purple-300/40 font-bold text-sm">
+        <i class="fa-solid fa-circle-check text-xl text-amber-300"></i>
+        <span id="toast-msg">¡Acción realizada con éxito! 🚀</span>
+    </div>
+
+    <!-- ENCABEZADO -->
+    <header class="w-full campus-banner pt-10 pb-16 px-4 text-center border-b border-unfv-maroon/60 relative">
+        <div class="max-w-2xl mx-auto space-y-4">
+            <div class="inline-flex items-center gap-2 bg-unfv-maroon/90 border border-amber-400/60 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest text-amber-300 shadow-xl animate-bounce-subtle">
+                <i class="fa-solid fa-bolt text-cyan-300"></i> FIEI - UNFV • 29 ANIVERSARIO <i class="fa-solid fa-microchip text-cyan-300"></i>
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-amber-300 to-cyan-200 drop-shadow-lg leading-tight uppercase">
+                ¡SÚMATE A MI META! 💛⚽
+            </h1>
+            
+            <p class="text-slate-200 text-xs sm:text-sm max-w-lg mx-auto font-medium leading-relaxed bg-black/60 p-3.5 rounded-2xl border border-amber-500/30 backdrop-blur-md shadow-2xl">
+                ¡Hola! He sido seleccionado para representar a la FIEI en estas Interfacultades. Para dejarlo todo en la cancha, busco tu apoyo para adquirir mi uniforme deportivo. 
+                <span class="text-amber-300 font-bold block mt-1">¡Ayúdame a llegar a la meta para ir uniformado! ⚡</span>
+            </p>
+        </div>
+    </header>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="w-full max-w-xl px-4 -mt-8 z-10 space-y-6">
+
+        <!-- CAMISETA FIEI UNFV -->
+        <section class="glass-card rounded-3xl p-5 sm:p-6 shadow-2xl animate-pulse-glow relative">
+            <div class="flex items-center justify-between mb-4 border-b border-rose-900/50 pb-3">
+                <h2 class="text-sm font-black text-amber-300 flex items-center gap-2">
+                    <i class="fa-solid fa-shirt text-cyan-400"></i>
+                    Camiseta Oficial FIEI (Dorsal #10)
+                </h2>
+                <span class="bg-cyan-950 text-cyan-300 text-[10px] font-mono px-2.5 py-1 rounded-full border border-cyan-500/40">
+                    S/ 60.00
+                </span>
+            </div>
+
+            <!-- IMAGEN DE LA CAMISETA -->
+            <div class="shirt-zoom-container relative bg-gradient-to-b from-black/90 to-unfv-dark/90 p-3 border border-amber-500/40 shadow-inner group cursor-pointer">
+                <img 
+                    src="https://i.postimg.cc/zDSL3QmS/5091724630841560694.jpg" 
+                    alt="Camiseta Oficial FIEI UNFV 29 Aniversario" 
+                    class="shirt-zoom-img w-full h-auto max-h-96 object-contain rounded-xl mx-auto"
+                />
+                <div class="absolute top-4 left-4 bg-unfv-yape text-white border border-purple-300/60 font-black text-[11px] px-3 py-1 rounded-full shadow-xl">
+                    💜 Solo por Yape
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mt-4 text-center text-xs">
+                <div class="bg-black/50 p-2 rounded-xl border border-slate-800">
+                    <span class="text-amber-400 font-bold block">Color</span>
+                    <span class="text-slate-300 text-[11px]">Guinda UNFV</span>
+                </div>
+                <div class="bg-black/50 p-2 rounded-xl border border-slate-800">
+                    <span class="text-amber-400 font-bold block">Estilo</span>
+                    <span class="text-slate-300 text-[11px]">Circuitos FIEI</span>
+                </div>
+                <div class="bg-black/50 p-2 rounded-xl border border-slate-800">
+                    <span class="text-amber-400 font-bold block">Dorsal</span>
+                    <span class="text-slate-300 text-[11px]">N° 10 Villarreal</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN YAPE (970500055) -->
+        <section class="glass-card rounded-3xl p-6 text-center space-y-5 border-2 border-unfv-yape relative overflow-hidden shadow-2xl">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-600/30 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="inline-flex items-center gap-2 bg-unfv-yape text-white px-5 py-2 rounded-full text-xs font-black tracking-wider shadow-lg">
+                <i class="fa-solid fa-mobile-screen-button text-amber-300 text-sm"></i> YAPETÓN EXCLUSIVO
+            </div>
+
+            <div class="bg-slate-950/90 rounded-2xl p-4 border border-purple-500/50 shadow-2xl space-y-3">
+                <div class="text-xs text-purple-300 font-bold uppercase tracking-widest flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-wallet"></i> Número de Yape
+                </div>
+                
+                <div class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-amber-200 to-cyan-300 font-mono tracking-wider select-all">
+                    970 500 055
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-2 pt-1">
+                    <button onclick="copyNumber()" class="flex-1 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black px-5 py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2 text-xs sm:text-sm">
+                        <i class="fa-solid fa-copy text-base"></i>
+                        <span>COPIAR NÚMERO YAPE</span>
+                    </button>
+
+                    <button onclick="openYape()" class="bg-unfv-yape hover:bg-purple-700 text-white font-black px-5 py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2 text-xs sm:text-sm">
+                        <i class="fa-solid fa-bolt text-amber-300"></i>
+                        <span>ABRIR YAPE</span>
+                    </button>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="toggleQRModal()" class="w-full text-xs bg-black/60 border border-purple-500/40 hover:border-cyan-400 text-cyan-300 font-bold py-2.5 px-4 rounded-xl transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-qrcode text-base text-purple-400"></i>
+                    <span>Ver Código QR de Yape</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- BARRA DE PROGRESO -->
+        <section class="glass-card rounded-3xl p-6 space-y-5">
+            <div class="flex justify-between items-center border-b border-rose-900/50 pb-3">
+                <h3 class="font-bold text-sm text-amber-300 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-emerald-400"></i>
+                    Meta para la Camiseta
+                </h3>
+                <span class="text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/60 px-3 py-1 rounded-full">
+                    Meta: S/ 60.00
+                </span>
+            </div>
+
+            <div class="space-y-2">
+                <div class="flex justify-between items-baseline text-sm font-bold">
+                    <span class="text-slate-300">Recaudado: <span id="current-amount" class="text-emerald-400 text-lg font-black">S/ 0.00</span></span>
+                    <span id="progress-percentage" class="text-cyan-300 font-mono text-sm">0% completado</span>
+                </div>
+                
+                <div class="w-full bg-slate-950 rounded-full h-6 p-1 border border-slate-700 relative overflow-hidden shadow-inner">
+                    <div id="progress-bar" class="bg-gradient-to-r from-purple-600 via-amber-500 to-cyan-400 h-full rounded-full transition-all duration-700" style="width: 0%;"></div>
+                </div>
+            </div>
+
+            <!-- BOTÓN SECRETO PARA QUE ACTUALICES DESDE TU CELULAR -->
+            <div class="pt-2 text-center">
+                <button onclick="openAdminModal()" class="text-[11px] text-slate-400 hover:text-amber-300 underline underline-offset-4 transition">
+                    <i class="fa-solid fa-lock text-[10px]"></i> Actualizar Meta (Solo Dueño)
+                </button>
+            </div>
+        </section>
+
+        <footer class="text-center text-xs text-slate-500 space-y-1.5 pt-4">
+            <p class="font-medium text-slate-400">Facultad de Ingeniería Electrónica e Informática (FIEI)</p>
+            <p class="text-[11px]">Universidad Nacional Federico Villarreal • 2026</p>
+        </footer>
+
+    </main>
+
+    <!-- MODAL QR -->
+    <div id="qr-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-sm w-full p-6 rounded-3xl text-center space-y-4 border border-purple-500/60 relative">
+            <button onclick="toggleQRModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-black/50 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="font-black text-lg text-white flex items-center justify-center gap-2">
+                <i class="fa-solid fa-qrcode text-purple-400"></i> Código QR Yape
+            </h4>
+            <div class="bg-white p-3 rounded-2xl inline-block shadow-2xl relative border-4 border-unfv-yape">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yape.pe&color=742284" alt="QR Yape" class="w-48 h-48 mx-auto"/>
+            </div>
+            <div class="text-xs text-slate-300 font-mono">
+                Número Yape: <br><strong class="text-amber-300 text-xl font-black">970 500 055</strong>
+            </div>
+            <button onclick="copyNumber(); toggleQRModal();" class="w-full bg-unfv-yape hover:bg-purple-700 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
+                Copiar Número e Ir a Yape
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL DE ADMINISTRADOR -->
+    <div id="admin-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-sm w-full p-6 rounded-3xl text-center space-y-4 border border-amber-500/60 relative">
+            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-black/50 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h4 class="font-black text-base text-amber-300 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-key text-cyan-400"></i> Panel de Administrador
+            </h4>
+            
+            <div id="admin-login-view" class="space-y-3">
+                <p class="text-xs text-slate-300">Ingresa tu contraseña de dueño para actualizar el monto:</p>
+                <input type="password" id="admin-pin" placeholder="Contraseña numérica" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-center tracking-widest text-white focus:outline-none focus:border-amber-400">
+                <button onclick="verifyAdminPin()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-2.5 rounded-xl text-xs transition">
+                    Entrar al Panel
+                </button>
+            </div>
+
+            <div id="admin-panel-view" class="space-y-3 hidden">
+                <p class="text-xs text-emerald-300 font-bold">¡Acceso concedido! 🔓</p>
+                <div class="space-y-1 text-left">
+                    <label class="text-[11px] text-slate-300 font-medium">Nuevo monto total recaudado (S/):</label>
+                    <input type="number" id="new-fund-amount" step="0.5" min="0" max="60" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
+                </div>
+                <button onclick="saveNewFund()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-black py-3 rounded-xl text-xs transition shadow-lg">
+                    Actualizar Barra en Vivo 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // CONTRASEÑA DE ADMINISTRADOR CONFIGURADA A 2527
+        const ADMIN_SECRET_PIN = "2527";
+        const goalFund = 60.00;
+        const rawPhoneNumber = "970500055";
+
+        let currentFund = parseFloat(localStorage.getItem('fiei_shirt_fund')) || 0.00;
+        updateUI();
+
+        function playSuccessSound() {
+            try {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return;
+                const ctx = new AudioContext();
+                const now = ctx.currentTime;
+                [523.25, 659.25, 783.99, 1046.50].forEach((freq, index) => {
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, now + (index * 0.08));
+                    gain.gain.setValueAtTime(0.25, now + (index * 0.08));
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + (index * 0.08) + 0.35);
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    osc.start(now + (index * 0.08));
+                    osc.stop(now + (index * 0.08) + 0.35);
+                });
+            } catch(e) {}
+        }
+
+        function copyNumber() {
+            const tempInput = document.createElement("input");
+            tempInput.value = rawPhoneNumber;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            try {
+                document.execCommand('copy');
+                showToast("¡Número 970500055 copiado para Yape! 💜");
+                if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 60, origin: { y: 0.7 } });
+                playSuccessSound();
+            } catch (err) {
+                showToast("Copia el número: 970500055");
+            } finally {
+                document.body.removeChild(tempInput);
+            }
+        }
+
+        function openYape() {
+            copyNumber();
+            setTimeout(() => { window.location.href = "https://yape.pe"; }, 600);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3500);
+        }
+
+        function updateUI() {
+            document.getElementById('current-amount').innerText = `S/ ${currentFund.toFixed(2)}`;
+            const pct = Math.min(Math.round((currentFund / goalFund) * 100), 100);
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+            document.getElementById('progress-percentage').innerText = `${pct}% completado`;
+        }
+
+        function toggleQRModal() {
+            document.getElementById('qr-modal').classList.toggle('hidden');
+        }
+
+        function openAdminModal() {
+            document.getElementById('admin-modal').classList.remove('hidden');
+            document.getElementById('admin-login-view').classList.remove('hidden');
+            document.getElementById('admin-panel-view').classList.add('hidden');
+            document.getElementById('admin-pin').value = '';
+        }
+
+        function closeAdminModal() {
+            document.getElementById('admin-modal').classList.add('hidden');
+        }
+
+        function verifyAdminPin() {
+            const pin = document.getElementById('admin-pin').value.trim();
+            if (pin === ADMIN_SECRET_PIN) {
+                document.getElementById('admin-login-view').classList.add('hidden');
+                document.getElementById('admin-panel-view').classList.remove('hidden');
+                document.getElementById('new-fund-amount').value = currentFund;
+            } else {
+                alert("❌ Contraseña incorrecta");
+            }
+        }
+
+        function saveNewFund() {
+            const val = parseFloat(document.getElementById('new-fund-amount').value);
+            if (isNaN(val) || val < 0) {
+                alert("Ingresa un monto válido");
+                return;
+            }
+            currentFund = val;
+            localStorage.setItem('fiei_shirt_fund', currentFund);
+            updateUI();
+            closeAdminModal();
+            showToast(`¡Meta actualizada a S/ ${currentFund.toFixed(2)} exitosamente! 🎉`);
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
+            }
+            playSuccessSound();
+        }
+    </script>
+</body>
+</html>
