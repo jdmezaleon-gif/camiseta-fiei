@@ -242,7 +242,7 @@
 
     </main>
 
-    <!-- MODAL QR -->
+    <!-- MODAL QR CON TU IMAGEN REAL -->
     <div id="qr-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="glass-card max-w-sm w-full p-6 rounded-3xl text-center space-y-4 border border-purple-500/60 relative">
             <button onclick="toggleQRModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-black/50 flex items-center justify-center">
@@ -252,7 +252,7 @@
                 <i class="fa-solid fa-qrcode text-purple-400"></i> Código QR Yape
             </h4>
             <div class="bg-white p-3 rounded-2xl inline-block shadow-2xl relative border-4 border-unfv-yape">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://yape.pe&color=742284" alt="QR Yape" class="w-48 h-48 mx-auto"/>
+                <img src="https://i.postimg.cc/bNvzpyxc/5091724630841560704.jpg" alt="QR Yape Real" class="w-48 h-48 mx-auto object-contain rounded-lg"/>
             </div>
             <div class="text-xs text-slate-300 font-mono">
                 Número Yape: <br><strong class="text-amber-300 text-xl font-black">970 500 055</strong>
@@ -295,7 +295,6 @@
     </div>
 
     <script>
-        // CONTRASEÑA DE ADMINISTRADOR CONFIGURADA A 2527
         const ADMIN_SECRET_PIN = "2527";
         const goalFund = 60.00;
         const rawPhoneNumber = "970500055";
