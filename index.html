@@ -183,15 +183,10 @@
                     970 500 055
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-2 pt-1">
-                    <button onclick="copyNumber()" class="flex-1 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black px-5 py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2 text-xs sm:text-sm">
+                <div class="pt-1">
+                    <button onclick="copyNumber()" class="w-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black px-5 py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2 text-xs sm:text-sm">
                         <i class="fa-solid fa-copy text-base"></i>
                         <span>COPIAR NÚMERO YAPE</span>
-                    </button>
-
-                    <button onclick="openYape()" class="bg-unfv-yape hover:bg-purple-700 text-white font-black px-5 py-3 rounded-xl shadow-lg transition transform active:scale-95 flex items-center justify-center gap-2 text-xs sm:text-sm">
-                        <i class="fa-solid fa-bolt text-amber-300"></i>
-                        <span>ABRIR YAPE</span>
                     </button>
                 </div>
             </div>
@@ -226,13 +221,6 @@
                     <div id="progress-bar" class="bg-gradient-to-r from-purple-600 via-amber-500 to-cyan-400 h-full rounded-full transition-all duration-700" style="width: 0%;"></div>
                 </div>
             </div>
-
-            <!-- BOTÓN SECRETO PARA QUE ACTUALICES DESDE TU CELULAR -->
-            <div class="pt-2 text-center">
-                <button onclick="openAdminModal()" class="text-[11px] text-slate-400 hover:text-amber-300 underline underline-offset-4 transition">
-                    <i class="fa-solid fa-lock text-[10px]"></i> Actualizar Meta (Solo Dueño)
-                </button>
-            </div>
         </section>
 
         <footer class="text-center text-xs text-slate-500 space-y-1.5 pt-4">
@@ -242,7 +230,7 @@
 
     </main>
 
-    <!-- MODAL QR CON LA NUEVA IMAGEN DE QR -->
+    <!-- MODAL QR -->
     <div id="qr-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="glass-card max-w-sm w-full p-6 rounded-3xl text-center space-y-4 border border-purple-500/60 relative">
             <button onclick="toggleQRModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-black/50 flex items-center justify-center">
@@ -258,48 +246,18 @@
                 Número Yape: <br><strong class="text-amber-300 text-xl font-black">970 500 055</strong>
             </div>
             <button onclick="copyNumber(); toggleQRModal();" class="w-full bg-unfv-yape hover:bg-purple-700 text-white font-black py-3 rounded-xl text-xs transition shadow-lg">
-                Copiar Número e Ir a Yape
+                Copiar Número
             </button>
-        </div>
-    </div>
-
-    <!-- MODAL DE ADMINISTRADOR -->
-    <div id="admin-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="glass-card max-w-sm w-full p-6 rounded-3xl text-center space-y-4 border border-amber-500/60 relative">
-            <button onclick="closeAdminModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-black/50 flex items-center justify-center">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h4 class="font-black text-base text-amber-300 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-key text-cyan-400"></i> Panel de Administrador
-            </h4>
-            
-            <div id="admin-login-view" class="space-y-3">
-                <p class="text-xs text-slate-300">Ingresa tu contraseña de dueño para actualizar el monto:</p>
-                <input type="password" id="admin-pin" placeholder="Contraseña numérica" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-center tracking-widest text-white focus:outline-none focus:border-amber-400">
-                <button onclick="verifyAdminPin()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-2.5 rounded-xl text-xs transition">
-                    Entrar al Panel
-                </button>
-            </div>
-
-            <div id="admin-panel-view" class="space-y-3 hidden">
-                <p class="text-xs text-emerald-300 font-bold">¡Acceso concedido! 🔓</p>
-                <div class="space-y-1 text-left">
-                    <label class="text-[11px] text-slate-300 font-medium">Nuevo monto total recaudado (S/):</label>
-                    <input type="number" id="new-fund-amount" step="0.5" min="0" max="60" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-400">
-                </div>
-                <button onclick="saveNewFund()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-black py-3 rounded-xl text-xs transition shadow-lg">
-                    Actualizar Barra en Vivo 🚀
-                </button>
-            </div>
         </div>
     </div>
 
     <script>
-        const ADMIN_SECRET_PIN = "2527";
         const goalFund = 60.00;
         const rawPhoneNumber = "970500055";
 
-        let currentFund = parseFloat(localStorage.getItem('fiei_shirt_fund')) ||37.00;
+        // CAMBIA AQUÍ EL NÚMERO CADA VEZ QUE TE YAPEEN (Ejemplo: 15.00, 30.00, etc.)
+        let currentFund = 37.00;
+        
         updateUI();
 
         function playSuccessSound() {
@@ -340,11 +298,6 @@
             }
         }
 
-        function openYape() {
-            copyNumber();
-            setTimeout(() => { window.location.href = "https://yape.pe"; }, 600);
-        }
-
         function showToast(message) {
             const toast = document.getElementById('toast');
             document.getElementById('toast-msg').innerText = message;
@@ -361,45 +314,6 @@
 
         function toggleQRModal() {
             document.getElementById('qr-modal').classList.toggle('hidden');
-        }
-
-        function openAdminModal() {
-            document.getElementById('admin-modal').classList.remove('hidden');
-            document.getElementById('admin-login-view').classList.remove('hidden');
-            document.getElementById('admin-panel-view').classList.add('hidden');
-            document.getElementById('admin-pin').value = '';
-        }
-
-        function closeAdminModal() {
-            document.getElementById('admin-modal').classList.add('hidden');
-        }
-
-        function verifyAdminPin() {
-            const pin = document.getElementById('admin-pin').value.trim();
-            if (pin === ADMIN_SECRET_PIN) {
-                document.getElementById('admin-login-view').classList.add('hidden');
-                document.getElementById('admin-panel-view').classList.remove('hidden');
-                document.getElementById('new-fund-amount').value = currentFund;
-            } else {
-                alert("❌ Contraseña incorrecta");
-            }
-        }
-
-        function saveNewFund() {
-            const val = parseFloat(document.getElementById('new-fund-amount').value);
-            if (isNaN(val) || val < 0) {
-                alert("Ingresa un monto válido");
-                return;
-            }
-            currentFund = val;
-            localStorage.setItem('fiei_shirt_fund', currentFund);
-            updateUI();
-            closeAdminModal();
-            showToast(`¡Meta actualizada a S/ ${currentFund.toFixed(2)} exitosamente! 🎉`);
-            if (typeof confetti === 'function') {
-                confetti({ particleCount: 120, spread: 90, origin: { y: 0.6 } });
-            }
-            playSuccessSound();
         }
     </script>
 </body>
