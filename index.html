@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡CAMISETA FIEI-UNFV! 🚀👕</title>
+    <title>¡YAPÉAME PARA MI CAMISETA FIEI-UNFV! 🚀👕</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome icons -->
@@ -126,7 +126,31 @@
     <!-- CONTENEDOR PRINCIPAL -->
     <main class="w-full max-w-xl px-4 -mt-8 z-10 space-y-6">
 
-        <!-- CAMISETA FIEI UNFV -->
+        <!-- 1. BARRA DE PROGRESO (AHORA ARRIBA) -->
+        <section class="glass-card rounded-3xl p-6 space-y-5 shadow-2xl">
+            <div class="flex justify-between items-center border-b border-rose-900/50 pb-3">
+                <h3 class="font-bold text-sm text-amber-300 flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line text-emerald-400"></i>
+                    Meta para la Camiseta
+                </h3>
+                <span class="text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/60 px-3 py-1 rounded-full">
+                    Meta: S/ 60.00
+                </span>
+            </div>
+
+            <div class="space-y-2">
+                <div class="flex justify-between items-baseline text-sm font-bold">
+                    <span class="text-slate-300">Recaudado: <span id="current-amount" class="text-emerald-400 text-lg font-black">S/ 0.00</span></span>
+                    <span id="progress-percentage" class="text-cyan-300 font-mono text-sm">0% completado</span>
+                </div>
+                
+                <div class="w-full bg-slate-950 rounded-full h-6 p-1 border border-slate-700 relative overflow-hidden shadow-inner">
+                    <div id="progress-bar" class="bg-gradient-to-r from-purple-600 via-amber-500 to-cyan-400 h-full rounded-full transition-all duration-700" style="width: 0%;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. CAMISETA FIEI UNFV -->
         <section class="glass-card rounded-3xl p-5 sm:p-6 shadow-2xl animate-pulse-glow relative">
             <div class="flex items-center justify-between mb-4 border-b border-rose-900/50 pb-3">
                 <h2 class="text-sm font-black text-amber-300 flex items-center gap-2">
@@ -166,7 +190,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN YAPE (970500055) -->
+        <!-- 3. SECCIÓN YAPE (AHORA ABAJO DEL TODO) -->
         <section class="glass-card rounded-3xl p-6 text-center space-y-5 border-2 border-unfv-yape relative overflow-hidden shadow-2xl">
             <div class="absolute -right-10 -top-10 w-32 h-32 bg-purple-600/30 rounded-full blur-2xl pointer-events-none"></div>
 
@@ -196,30 +220,6 @@
                     <i class="fa-solid fa-qrcode text-base text-purple-400"></i>
                     <span>Ver Código QR de Yape</span>
                 </button>
-            </div>
-        </section>
-
-        <!-- BARRA DE PROGRESO -->
-        <section class="glass-card rounded-3xl p-6 space-y-5">
-            <div class="flex justify-between items-center border-b border-rose-900/50 pb-3">
-                <h3 class="font-bold text-sm text-amber-300 flex items-center gap-2">
-                    <i class="fa-solid fa-chart-line text-emerald-400"></i>
-                    Meta para la Camiseta
-                </h3>
-                <span class="text-xs font-mono font-bold bg-amber-950 text-amber-300 border border-amber-800/60 px-3 py-1 rounded-full">
-                    Meta: S/ 60.00
-                </span>
-            </div>
-
-            <div class="space-y-2">
-                <div class="flex justify-between items-baseline text-sm font-bold">
-                    <span class="text-slate-300">Recaudado: <span id="current-amount" class="text-emerald-400 text-lg font-black">S/ 0.00</span></span>
-                    <span id="progress-percentage" class="text-cyan-300 font-mono text-sm">0% completado</span>
-                </div>
-                
-                <div class="w-full bg-slate-950 rounded-full h-6 p-1 border border-slate-700 relative overflow-hidden shadow-inner">
-                    <div id="progress-bar" class="bg-gradient-to-r from-purple-600 via-amber-500 to-cyan-400 h-full rounded-full transition-all duration-700" style="width: 0%;"></div>
-                </div>
             </div>
         </section>
 
